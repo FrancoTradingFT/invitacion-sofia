@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<!-- invitacion_sofia_v11.html (deploy: index.html) -->
-<!-- v11 · Invitación digital interactiva · Cumple 1 añito de Sofía
-     Changelog v11:
-     - Cartel de agradecimiento al tocar "Confirmar": overlay con branding
-       (corona dorada, destellos, "La princesita Sofía te espera") durante
-       4 segundos y redirección automática al WhatsApp de Tami, con
-       botón "Ir ahora" por si no quieren esperar.
-     - Registro opcional de confirmaciones en Google Sheets vía Apps Script:
-       pegar la URL del script en SHEET_ENDPOINT (marcado con BACKEND:).
-       Si queda vacío, todo funciona igual y no se registra nada.
-     - burstSparkles refactorizado para disparar desde coordenadas arbitrarias
-       (lo usan el sobre y el cartel de gracias).
+<!-- invitacion_sofia_v12.html (deploy: index.html) -->
+<!-- v12 · Invitación digital interactiva · Cumple 1 añito de Sofía
+     Changelog v12:
+     - SHEET_ENDPOINT conectado al Apps Script de la planilla de invitados:
+       cada toque en "Confirmar" registra fecha+nombre en la pestaña
+       Confirmaciones y tilda el check (col. E) del invitado que coincida.
+     v11: cartel de gracias 4s + registro opcional en Sheets.
      v10: personalización por invitado (?para=Nombre).
      v9: destellos dorados, 40 unidades, caída larga, ~2 s.
      v8: lluvia de destellos al abrir el sobre.
@@ -735,10 +730,8 @@ p{line-height:1.6}
   });
 
   /* ---- Confirmación: cartel de gracias + registro + WhatsApp ---- */
-  // BACKEND: pegar acá la URL del Apps Script de Google Sheets para registrar
-  // confirmaciones (ver instrucciones). Vacío = no se registra nada y todo
-  // funciona igual.
-  var SHEET_ENDPOINT = '';
+  // Registro de confirmaciones en la planilla de invitados (Apps Script).
+  var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyRhlOetijwbKmSrR6H3Ulffz2Y2ZN6tCp_wIyEzQU8c3-lPfdp3dNCtWeSKmE5lySX/exec';
 
   function registrarConfirmacion(){
     if (!SHEET_ENDPOINT) return;
